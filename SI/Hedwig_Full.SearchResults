@@ -1,0 +1,5 @@
+---- gapProfileState Matches (4 in 1 files) ----
+SensorTag.c (projects\ble\app\source):static gaprole_States_t gapProfileState = GAPROLE_INIT;
+SensorTag.c (projects\ble\app\source):////            if ( gapProfileState != GAPROLE_CONNECTED )
+SensorTag.c (projects\ble\app\source):////            if ( gapProfileState == GAPROLE_CONNECTED )
+SensorTag.c (projects\ble\app\source):    gapProfileState = newState;
