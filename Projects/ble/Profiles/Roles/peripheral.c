@@ -375,6 +375,7 @@ bStatus_t GAPRole_SetParameter( uint16 param, uint8 len, void *pValue )
       if ( (len == sizeof ( uint8 )) && (*((uint8*)pValue) <= TRUE) )
       {
         gapRole_ParamUpdateEnable = *((uint8*)pValue);
+        //gapRole_ParamUpdateEnable = TRUE;
       }
       else
       {
@@ -385,7 +386,7 @@ bStatus_t GAPRole_SetParameter( uint16 param, uint8 len, void *pValue )
     case GAPROLE_MIN_CONN_INTERVAL:
       {
         uint16 newInterval = *((uint16*)pValue);
-        //newInterval=DEFAULT_DESIRED_MIN_CONN_INTERVAL
+
         if (   len == sizeof ( uint16 )           &&
              ( newInterval >= MIN_CONN_INTERVAL ) &&
              ( newInterval <= MAX_CONN_INTERVAL ) )
@@ -1191,8 +1192,7 @@ static void gapRole_startConnUpdate( uint8 handleFailure )
         
     updateReq.intervalMin = gapRole_MinConnInterval;
     updateReq.intervalMax = gapRole_MaxConnInterval;
-//    updateReq.intervalMin =800;
-//    updateReq.intervalMax =800;
+
     updateReq.slaveLatency = gapRole_SlaveLatency;
     updateReq.timeoutMultiplier = gapRole_TimeoutMultiplier;
     

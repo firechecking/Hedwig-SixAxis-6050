@@ -1,78 +1,78 @@
-"D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\common\cc2540\OnBoard.c"
+"D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\common\cc2540\OnBoard.c"
 -std=c99
 -ferror-limit=100
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\common
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\common
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\hal\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\hal\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\hal\target\CC2541ST
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\hal\target\CC2541ST
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\osal\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\osal\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\services\saddr
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\services\saddr
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\controller\phy
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\controller\phy
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\controller\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\controller\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\hci
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\hci
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\host
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\..\..\Components\ble\host
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\common\cc2540
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\common\cc2540
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\common\npi\npi_np
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\common\npi\npi_np
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\Profiles\Roles
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\Profiles\Roles
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\Profiles\SensorProfile
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\Profiles\SensorProfile
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\Profiles\Keys
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\Profiles\Keys
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\app\CC2541DB\..\..\Profiles\DevInfo
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\app\CC2541DB\..\..\Profiles\DevInfo
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\8051\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\8051\inc\clib
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\common
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\common
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\hal\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\hal\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\hal\target\CC2541ST
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\hal\target\CC2541ST
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\osal\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\osal\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\services\saddr
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\services\saddr
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\ble\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\ble\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\ble\controller\phy
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\ble\controller\phy
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\ble\controller\include
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\ble\controller\include
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\ble\hci
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\ble\hci
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Components\ble\host
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Components\ble\host
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\common\cc2540
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\common\cc2540
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\common\npi\npi_np
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\common\npi\npi_np
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\Profiles\Roles
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\Profiles\Roles
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\Profiles\SensorProfile
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\Profiles\SensorProfile
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\Profiles\Keys
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\Profiles\Keys
 -I
-D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\Profiles\DevInfo
+D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis-6050\Projects\ble\Profiles\DevInfo
 -DINT_HEAP_LEN=3072
 -DHALNODEBUG=0
 -DOSAL_CBTIMER_NUM_TASKS=1
@@ -377,8 +377,8 @@ D:\zzz\project\Hedwig-SixAxis\Hedwig-SixAxis - ALL2\Projects\ble\Profiles\DevInf
 -D__PLAIN_INT_BITFIELD_IS_SIGNED__=1
 -D__HAS_LOCATED_DECLARATION__=1
 -D__IAR_COMPILERBASE__=593409
--D__DATE__="Jul 18 2014"
--D__TIME__="09:52:29"
+-D__DATE__="Jul 22 2014"
+-D__TIME__="18:08:14"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1

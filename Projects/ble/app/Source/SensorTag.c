@@ -80,6 +80,7 @@
 #include "gyroservice.h"
 #include "testservice.h"
 #include "simplekeys.h"
+//#include "ccservice.h"
 
 // Sensor drivers
 #include "sensorTag.h"
@@ -116,23 +117,23 @@
 #define GYRO_STARTUP_TIME                     60    // Start-up time max. 50 ms
 
 // What is the advertising interval when device is discoverable (units of 625us, 160=100ms)
-#define DEFAULT_ADVERTISING_INTERVAL          160
+#define DEFAULT_ADVERTISING_INTERVAL          1600
 
 // General discoverable mode advertises indefinitely
-//#define DEFAULT_DISCOVERABLE_MODE             GAP_ADTYPE_FLAGS_GENERAL
-#define DEFAULT_DISCOVERABLE_MODE             GAP_ADTYPE_FLAGS_LIMITED
+#define DEFAULT_DISCOVERABLE_MODE             GAP_ADTYPE_FLAGS_GENERAL
+//#define DEFAULT_DISCOVERABLE_MODE             GAP_ADTYPE_FLAGS_LIMITED
 
 // Minimum connection interval (units of 1.25ms, 80=100ms) if automatic parameter update request is enabled
 #define DEFAULT_DESIRED_MIN_CONN_INTERVAL     80
 
 // Maximum connection interval (units of 1.25ms, 800=1000ms) if automatic parameter update request is enabled
-#define DEFAULT_DESIRED_MAX_CONN_INTERVAL     800
+#define DEFAULT_DESIRED_MAX_CONN_INTERVAL     80
 
 // Slave latency to use if automatic parameter update request is enabled
 #define DEFAULT_DESIRED_SLAVE_LATENCY         0
 
 // Supervision timeout value (units of 10ms, 1000=10s) if automatic parameter update request is enabled
-#define DEFAULT_DESIRED_CONN_TIMEOUT          3200
+#define DEFAULT_DESIRED_CONN_TIMEOUT          1000
 
 // Whether to enable automatic parameter update request when a connection is formed
 //#define DEFAULT_ENABLE_UPDATE_REQUEST         TRUE
@@ -167,6 +168,9 @@
 
 // System reset
 #define ST_SYS_RESET_DELAY                    3000
+
+#define LED_TURN_OFF		do{P1 &= (~0x04);}while(0)
+#define LED_TURN_ON			do{P1 |= 0x04;}while(0)
 
 /*********************************************************************
  * TYPEDEFS
@@ -268,6 +272,7 @@ static void accelChangeCB( uint8 paramID );
 //static void humidityChangeCB( uint8 paramID);
 //static void magnetometerChangeCB( uint8 paramID );
 static void gyroChangeCB( uint8 paramID );
+static void ccChangeCB( uint8 paramID );
 //static void testChangeCB( uint8 paramID );
 
 //static void resetSensorSetup( void );
@@ -324,6 +329,10 @@ static gyroCBs_t sensorTag_GyroCBs =
     gyroChangeCB,             // Characteristic value change callback
 };
 
+//static ccCBs_t sensorTag_ccCBs =
+//{
+// ccChangeCB,               // Charactersitic value change callback
+//};
 //static testCBs_t sensorTag_TestCBs =
 //{
 //    testChangeCB,             // Charactersitic value change callback
@@ -350,6 +359,7 @@ static gyroCBs_t sensorTag_GyroCBs =
  */
 void SensorTag_Init( uint8 task_id )
 {
+    //LED_TURN_OFF;
     sensorTag_TaskID = task_id;
     // Setup the GAP
     VOID GAP_SetParamValue( TGAP_CONN_PAUSE_PERIPHERAL, DEFAULT_CONN_PAUSE_PERIPHERAL );
@@ -357,6 +367,7 @@ void SensorTag_Init( uint8 task_id )
     {
         // Device starts advertising upon initialization
         uint8 initial_advertising_enable = TRUE;
+        //uint8 initial_advertising_enable = FALSE;
         // By setting this to zero, the device will go into the waiting state after
         // being discoverable for 30.72 second, and will not being advertising again
         // until the enabler is set back to TRUE
@@ -367,6 +378,7 @@ void SensorTag_Init( uint8 task_id )
         uint16 desired_slave_latency = DEFAULT_DESIRED_SLAVE_LATENCY;
         uint16 desired_conn_timeout = DEFAULT_DESIRED_CONN_TIMEOUT;
         // Set the GAP Role Parameters
+      
         GAPRole_SetParameter( GAPROLE_ADVERT_ENABLED, sizeof( uint8 ), &initial_advertising_enable );
         GAPRole_SetParameter( GAPROLE_ADVERT_OFF_TIME, sizeof( uint16 ), &gapRole_AdvertOffTime );
         GAPRole_SetParameter( GAPROLE_SCAN_RSP_DATA, sizeof ( scanRspData ), scanRspData );
@@ -376,6 +388,8 @@ void SensorTag_Init( uint8 task_id )
         GAPRole_SetParameter( GAPROLE_MAX_CONN_INTERVAL, sizeof( uint16 ), &desired_max_interval );
         GAPRole_SetParameter( GAPROLE_SLAVE_LATENCY, sizeof( uint16 ), &desired_slave_latency );
         GAPRole_SetParameter( GAPROLE_TIMEOUT_MULTIPLIER, sizeof( uint16 ), &desired_conn_timeout );
+        
+        //GAPRole_SendUpdateParam( desired_min_interval, desired_max_interval, desired_slave_latency, desired_conn_timeout, GAPROLE_TERMINATE_LINK);
     }
     // Set the GAP Characteristics
     GGS_SetParameter( GGS_DEVICE_NAME_ATT, sizeof(attDeviceName), attDeviceName );
@@ -410,6 +424,7 @@ void SensorTag_Init( uint8 task_id )
     //Magnetometer_AddService( GATT_ALL_SERVICES );   // Magnetometer Service
     //Barometer_AddService( GATT_ALL_SERVICES );      // Barometer Service
     Gyro_AddService( GATT_ALL_SERVICES );           // Gyro Service
+    //CcService_AddService( GATT_ALL_SERVICES );      // Connection Control Service
     //SK_AddService( GATT_ALL_SERVICES );             // Simple Keys Profile
     //Test_AddService( GATT_ALL_SERVICES );           // Test Profile
 //#if defined FEATURE_OAD
@@ -437,6 +452,7 @@ void SensorTag_Init( uint8 task_id )
     //Humidity_RegisterAppCBs( &sensorTag_HumidCBs );
     //Barometer_RegisterAppCBs( &sensorTag_BarometerCBs );
     Gyro_RegisterAppCBs( &sensorTag_GyroCBs );
+    //VOID CcService_RegisterAppCBs( &sensorTag_ccCBs );
     //Test_RegisterAppCBs( &sensorTag_TestCBs );
     // Enable clock divide on halt
     // This reduces active current while radio is active and CC254x MCU
@@ -524,6 +540,8 @@ uint16 SensorTag_ProcessEvent( uint8 task_id, uint16 events )
             {
                 HalGyroSelectAxes(sensorGyroAxes);
                 HalGyroTurnOn();
+                GAPRole_SendUpdateParam( 240, 256,0, 138, GAPROLE_TERMINATE_LINK);
+                //GAPRole_SendUpdateParam( 100, 105,0, 138, GAPROLE_TERMINATE_LINK);
                 osal_start_timerEx( sensorTag_TaskID, ST_GYROSCOPE_SENSOR_EVT, GYRO_STARTUP_TIME);
             }
             else
@@ -636,10 +654,13 @@ static void peripheralStateNotificationCB( gaprole_States_t newState )
         }
         break;
         case GAPROLE_ADVERTISING:
-            HalLedSet(HAL_LED_1, HAL_LED_MODE_ON );
+            //HalLedSet(HAL_LED_1, HAL_LED_MODE_ON );
+            LED_TURN_OFF;
+            osal_stop_timerEx(sensorTag_TaskID, ST_GYROSCOPE_SENSOR_EVT);
             break;
         case GAPROLE_CONNECTED:
-            HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF );
+            //HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF );
+            LED_TURN_OFF;
             break;
         case GAPROLE_WAITING:
             // Link terminated intentionally: reset all sensors
@@ -685,6 +706,7 @@ static void readGyroData( void )
 {
     uint8 aData[ACCELEROMETER_DATA_LEN];
     uint8 gData[GYROSCOPE_DATA_LEN];
+    //GAPRole_SendUpdateParam( DEFAULT_DESIRED_MIN_CONN_INTERVAL, DEFAULT_DESIRED_MAX_CONN_INTERVAL, DEFAULT_DESIRED_CONN_TIMEOUT, DEFAULT_DESIRED_CONN_TIMEOUT, GAPROLE_TERMINATE_LINK);
     if (HalGyroRead(aData,gData))
     {
         Accel_SetParameter( ACCELEROMETER_DATA, ACCELEROMETER_DATA_LEN, aData);
@@ -955,6 +977,48 @@ static void resetCharacteristicValue(uint16 servUuid, uint8 paramID, uint8 value
     }
     osal_mem_free(pData);
 }
+
+/*********************************************************************
+ * @fn      ccChangeCB
+ *
+ * @brief   Callback from Connection Control indicating a value change
+ *
+ * @param   paramID - parameter ID of the value that was changed.
+ *
+ * @return  none
+ */
+//static void ccChangeCB( uint8 paramID )
+//{
+//
+//  // CCSERVICE_CHAR1: read & notify only
+//
+//  // CCSERVICE_CHAR: requested connection parameters
+//  if( paramID == CCSERVICE_CHAR2 )
+//  {
+//    uint8 buf[CCSERVICE_CHAR2_LEN];
+//    uint16 minConnInterval;
+//    uint16 maxConnInterval;
+//    uint16 slaveLatency;
+//    uint16 timeoutMultiplier;
+//
+//    CcService_GetParameter( CCSERVICE_CHAR2, buf );
+//
+//    minConnInterval = BUILD_UINT16(buf[0],buf[1]);
+//    maxConnInterval = BUILD_UINT16(buf[2],buf[3]);
+//    slaveLatency = BUILD_UINT16(buf[4],buf[5]);
+//    timeoutMultiplier = BUILD_UINT16(buf[6],buf[7]);
+//
+//    // Update connection parameters
+//    //GAPRole_SendUpdateParam( minConnInterval, maxConnInterval, slaveLatency, timeoutMultiplier, GAPROLE_TERMINATE_LINK);
+//  }
+//
+//  // CCSERVICE_CHAR3: Disconnect request
+//  if( paramID == CCSERVICE_CHAR3 )
+//  {
+//    // Any change in the value will terminate the connection
+//    GAPRole_TerminateConnection();
+//  }
+//}
 
 /*********************************************************************
  * @fn      resetCharacteristicValues

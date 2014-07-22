@@ -122,7 +122,7 @@
 #define HAL_GYRO_USER_CTRL_GYRO_RST             0x01
 
 #define HAL_GYRO_PWR_MGM_H_RESET                0x80
-#define HAL_GYRO_PWR_MGM_SLEEP                  0x40
+#define HAL_GYRO_PWR_MGM_SLEEP                  0x4B
 #define HAL_GYRO_PWR_MGM_STBY_XG                0x20
 #define HAL_GYRO_PWR_MGM_STBY_YG                0x10
 #define HAL_GYRO_PWR_MGM_STBY_ZG                0x08
